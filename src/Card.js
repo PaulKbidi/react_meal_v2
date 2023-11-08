@@ -1,6 +1,11 @@
 import React from 'react'
+import Meal from './Meal';
 
 function Card({restaurant}) {
+    let meals = [];
+    restaurant.attributes.meals.data.forEach((meal) => {
+      meals.push(meal.attributes.name);
+    });
     var op = "";
     var color = "";
     if (restaurant.attributes.open === false) {
@@ -12,10 +17,17 @@ function Card({restaurant}) {
     }
   return (
     <div className="card">
-        <h1>{restaurant.attributes.name} </h1>
-        <p className={color}> {op} </p>
-        <p>Nom du plat : {} </p>
-        <p>Nom de la Ville : {restaurant.attributes.ville.data.attributes.name} </p>
+      <h1>{restaurant.attributes.name} </h1>
+      <p className={color}> {op} </p>
+      <p className='city'>
+        Ville : {restaurant.attributes.ville.data.attributes.name}
+      </p>
+      <p className="meals">
+        <span>Nom des plats :</span>
+        {meals.map((meal, index) => {
+          return <Meal meal={meal} key={index} />;
+        })}
+      </p>
     </div>
   );
 }

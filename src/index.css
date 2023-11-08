@@ -55,6 +55,24 @@ img {
   width: 252px;
 }
 
+.city {
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.meals {
+  text-align: center;
+}
+
+.meals span {
+  font-size: 1.5rem;
+}
+
+.meals div {
+  margin: 1rem;
+  border-bottom: 2px solid #ff7b17;
+}
+
 .price {
   font-size: 1.5rem;
   font-weight: 700;
