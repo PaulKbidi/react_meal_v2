@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Card from './Card';
 
 function App() {
+    const [restaurants, setRestaurants] = useState([]);
+    const api ="http://localhost:1337/api/restaurants?populate=*";
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const request = await fetch(api);
+        const data = await request.json();
+        setRestaurants(data.data)
+        console.log(data.data);
+    };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1>Restaurants</h1>
+        <form onSubmit={handleSubmit}>
+          <input type="submit" value="Rechercher" />
+        </form>
       </header>
+      <main>
+      {restaurants
+        .map((restaurant, index) => {
+          return <Card restaurant={restaurant} key={index} />;
+        })}
+      </main>
     </div>
   );
 }
 
-export default App;
+export default App
